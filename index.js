@@ -17,11 +17,19 @@ async function run() {
     try {
         const database = client.db("food-delivery");
         const foods = database.collection("foods");
+        const orders = database.collection("orders");
 
         // GET API
         app.get('/foods', async (req, res) => {
             const cursor = foods.find({});
             const result = await cursor.toArray();
+            res.json(result);
+        });
+
+        //POST API
+        app.post('/orders', async (req, res) => {
+            const order = req.body;
+            const result = await orders.insertOne(order);
             res.json(result);
         })
     }
