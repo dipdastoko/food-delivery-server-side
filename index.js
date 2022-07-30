@@ -44,6 +44,18 @@ async function run() {
             const newFood = req.body;
             const result = await foods.insertOne(newFood);
             res.json(result);
+        });
+
+        // UPDATE API
+        app.put('/updateStatus/:id', async (req, res) => {
+            const filter = { _id: ObjectId(req.params.id) };
+            const updateDoc = {
+                $set: {
+                    status: 'Approved'
+                }
+            };
+            const result = await orders.updateOne(filter, updateDoc);
+            res.json(result);
         })
 
         // DELETE API
