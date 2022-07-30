@@ -40,6 +40,12 @@ async function run() {
             res.json(result);
         });
 
+        app.post('/newFood', async (req, res) => {
+            const newFood = req.body;
+            const result = await foods.insertOne(newFood);
+            res.json(result);
+        })
+
         // DELETE API
         app.delete('/cancelOrder/:id', async (req, res) => {
             const id = req.params.id;
