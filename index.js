@@ -26,6 +26,12 @@ async function run() {
             res.json(result);
         });
 
+        app.get('/getOrders', async (req, res) => {
+            const cursor = orders.find({});
+            const result = await cursor.toArray();
+            res.json(result);
+        })
+
         //POST API
         app.post('/orders', async (req, res) => {
             const order = req.body;
